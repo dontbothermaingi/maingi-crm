@@ -11,5 +11,9 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "react-router-dom": "^7.9.2"
+  }
 }

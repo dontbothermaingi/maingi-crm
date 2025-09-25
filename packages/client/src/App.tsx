@@ -1,13 +1,13 @@
-import "./App.css";
-import { Button } from "./components/ui/button";
+import { Route, Routes } from 'react-router';
+import './App.css';
+import Ui from './panels/control/ui';
 
 function App() {
-  return (
-    <div className="p-4">
-      <p className="font-bold tetx-4xl">The beginning</p>
-      <Button className="">Click me</Button>
-    </div>
-  );
+   return (
+      <Routes>
+         <Route path="/" element={<Ui />} />
+      </Routes>
+   );
 }
 
 export default App;
