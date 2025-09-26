@@ -1,17 +1,12 @@
 import {
    Bolt,
-   Calendar,
    ChevronDown,
    ChevronUp,
    Disc,
    Fuel,
-   Home,
-   Inbox,
    LayoutDashboard,
-   PiggyBank,
+   Paperclip,
    Receipt,
-   Search,
-   Settings,
    ShoppingCart,
    Store,
    Truck,
@@ -24,9 +19,6 @@ import {
    Sidebar,
    SidebarContent,
    SidebarFooter,
-   SidebarGroup,
-   SidebarGroupContent,
-   SidebarGroupLabel,
    SidebarHeader,
    SidebarMenu,
    SidebarMenuButton,
@@ -46,36 +38,10 @@ import {
    DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu';
 
-// Menu items.
-const items = [
-   {
-      title: 'Home',
-      url: '#',
-      icon: Home,
-   },
-   {
-      title: 'Inbox',
-      url: '#',
-      icon: Inbox,
-   },
-   {
-      title: 'Calendar',
-      url: '#',
-      icon: Calendar,
-   },
-   {
-      title: 'Search',
-      url: '#',
-      icon: Search,
-   },
-   {
-      title: 'Settings',
-      url: '#',
-      icon: Settings,
-   },
-];
-
 export function AppSidebar() {
+   const access_token = localStorage.getItem('access_token');
+
+   console.log(access_token);
    return (
       <Sidebar variant="floating">
          {/* Sidebar header */}
@@ -253,6 +219,38 @@ export function AppSidebar() {
                      </CollapsibleContent>
                   </SidebarMenuItem>
                </Collapsible>
+
+               {/* Tyres */}
+               <Collapsible>
+                  <SidebarMenuItem>
+                     <CollapsibleTrigger asChild>
+                        <SidebarMenuButton>
+                           <Paperclip /> Report
+                           <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                        </SidebarMenuButton>
+                     </CollapsibleTrigger>
+                     <CollapsibleContent>
+                        <SidebarMenuSub>
+                           <SidebarMenuSubItem>
+                              <SidebarMenuButton>Pump Report</SidebarMenuButton>
+                           </SidebarMenuSubItem>
+                           <SidebarMenuSubItem>
+                              <SidebarMenuButton>
+                                 Fuel Transactions
+                              </SidebarMenuButton>
+                           </SidebarMenuSubItem>
+                           <SidebarMenuSubItem>
+                              <SidebarMenuButton>
+                                 Repairs Made
+                              </SidebarMenuButton>
+                           </SidebarMenuSubItem>
+                           <SidebarMenuSubItem>
+                              <SidebarMenuButton>Fuel Report</SidebarMenuButton>
+                           </SidebarMenuSubItem>
+                        </SidebarMenuSub>
+                     </CollapsibleContent>
+                  </SidebarMenuItem>
+               </Collapsible>
             </SidebarMenu>
          </SidebarContent>
 
@@ -271,15 +269,15 @@ export function AppSidebar() {
                         side="top"
                         className="bg-white w-51 p-2 mb-2 rounded-md shadow-xl border border-gray-800 flex flex-col gap-1"
                      >
-                        <DropdownMenuItem>
-                           <span className="text-sm">Account</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                           <span className="text-sm">Billing</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                           <span className="text-sm">Sign out</span>
-                        </DropdownMenuItem>
+                        {access_token ? (
+                           <DropdownMenuItem>
+                              <span className="text-sm">Sign out</span>
+                           </DropdownMenuItem>
+                        ) : (
+                           <DropdownMenuItem>
+                              <span className="text-sm">Sign in</span>
+                           </DropdownMenuItem>
+                        )}
                      </DropdownMenuContent>
                   </DropdownMenu>
                </SidebarMenuItem>
